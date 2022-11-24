@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "jwt.auth.expiration-in-days",
+      "type": "java.lang.Integer",
+      "description": "JWT token TTL in days."
+    },
+    {
+      "name": "jwt.auth.secret",
+      "type": "java.lang.String",
+      "description": "JWT auth secret key."
+    }
+  ] }
