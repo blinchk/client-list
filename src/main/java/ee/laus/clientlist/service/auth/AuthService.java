@@ -7,6 +7,8 @@ import ee.laus.clientlist.util.BasicAuthHeaderUtil;
 import ee.laus.clientlist.util.BasicTokenUtil;
 import ee.laus.clientlist.util.UsernamePasswordCredentials;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtSupport jwtSupport;
+    private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public JwtResponse authenticate(final String header) {
         try {
@@ -32,6 +35,8 @@ public class AuthService {
                     ));
             setAuthenticationInContext(authentication);
             final String token = jwtSupport.generateToken(authentication);
+            logger.info("User with username={} successfully authenticated with username and password",
+                    credentials.getUsername());
             return new JwtResponse(credentials.getUsername(), token);
         } catch (AuthenticationException | IllegalArgumentException exception) {
             throw new UnauthorizedException("Authorization is failed", exception);
