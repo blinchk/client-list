@@ -1,4 +1,4 @@
-package ee.laus.clientlist.config;
+package ee.laus.clientlist.config.encoder;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

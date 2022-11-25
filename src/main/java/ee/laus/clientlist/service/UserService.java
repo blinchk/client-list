@@ -9,8 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,10 +17,7 @@ public class UserService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        final Optional<User> user = repository.findById(userDetails.getId());
-        if (user.isEmpty()) {
-            throw new UnauthorizedException();
-        }
-        return user.get();
+        final User user = repository.findById(userDetails.getId()).orElseThrow(UnauthorizedException::new);
+        return user;
     }
 }

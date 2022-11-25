@@ -26,4 +26,12 @@ public class Client {
     private Country country;
     @ManyToOne
     private User user;
+
+    public boolean isCreatedByUser(Long userId) {
+        return userId.equals(user.getId());
+    }
+
+    public boolean isNotCreatedByUser(Long userId) {
+        return !isCreatedByUser(userId);
+    }
 }

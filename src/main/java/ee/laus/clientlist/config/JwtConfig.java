@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtConfig {
     @Value("${jwt.auth.secret}")
-    private String secret;
+    private String signingKey;
     @Value("${jwt.auth.expiration-time-in-days}")
     private int expirationInDays;
 
     public JwtProperties getProperties() {
-        return new JwtProperties(secret, expirationInDays);
+        return new JwtProperties(signingKey, expirationInDays);
     }
 }

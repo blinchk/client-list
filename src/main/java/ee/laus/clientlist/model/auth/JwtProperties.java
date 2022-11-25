@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class JwtProperties {
-    private final String secret;
+    private final String signingKey;
     private final int expirationTimeInDays;
 }

@@ -16,8 +16,8 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping
-    public List<ClientListItemResponse> findAll() {
-        return clientService.findAll();
+    public List<ClientListItemResponse> findAllByCurrentUser() {
+        return clientService.findAllByCurrentUser();
     }
 
     @GetMapping("/{id}")
