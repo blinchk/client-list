@@ -62,6 +62,7 @@ public class ClientService {
         logger.info("Client with id={} updated by user with username={}", client.getId(), user.getUsername());
         client = mapper.map(dto, Client.class);
         client.setId(id);
+        client.setUser(user);
         return mapper.map(repository.save(client), ClientResponse.class);
     }
 }

@@ -1,7 +1,10 @@
 package ee.laus.clientlist.service.auth;
 
 import ee.laus.clientlist.exception.UnauthorizedException;
+import ee.laus.clientlist.model.User;
+import ee.laus.clientlist.response.auth.AuthMeResponse;
 import ee.laus.clientlist.response.auth.JwtResponse;
+import ee.laus.clientlist.service.UserService;
 import ee.laus.clientlist.support.JwtSupport;
 import ee.laus.clientlist.util.BasicAuthHeaderUtil;
 import ee.laus.clientlist.util.BasicTokenUtil;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtSupport jwtSupport;
+    private final UserService userService;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public JwtResponse authenticate(final String header) {
@@ -45,5 +49,13 @@ public class AuthService {
 
     public void setAuthenticationInContext(Authentication authentication) {
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    public AuthMeResponse isLoggedIn() {
+        final User user = userService.getCurrentUser();
+        return new AuthMeResponse(
+                true,
+                user.getUsername()
+        );
     }
 }

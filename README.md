@@ -6,3 +6,8 @@ Technologies:
 * Hibernate
 * H2 Database
 * JUnit5 + Mockito
+* Angular
+
+
+## How to run?
+`docker compose up -d`

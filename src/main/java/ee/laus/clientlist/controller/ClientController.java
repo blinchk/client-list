@@ -5,6 +5,8 @@ import ee.laus.clientlist.response.client.ClientListItemResponse;
 import ee.laus.clientlist.response.client.ClientResponse;
 import ee.laus.clientlist.service.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
     private final ClientService clientService;
+    private final static Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @GetMapping
     public List<ClientListItemResponse> findAllByCurrentUser() {

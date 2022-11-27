@@ -1,0 +1,28 @@
+<div class="container p-2">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="col-lg-4 col-md-12">
+      <div class="card">
+        <h5 class="card-header">Login</h5>
+        <div class="card-body">
+          <div class="alert alert-danger" *ngIf="authFailed">
+            Username or password is <strong>invalid</strong>!
+          </div>
+          <div class="d-flex flex-row align-items-center my-2r">
+            <label for="username" class="flex-grow-1 me-2">Username</label>
+            <input type="text" class="form-control flex-grow-0 w-75" id="username" [(ngModel)]="credentials.username">
+          </div>
+          <div class="d-flex flex-row align-items-center my-2">
+            <label for="password" class="flex-grow-1 me-2">Password</label>
+            <input type="password"
+                   class="form-control flex-grow-0 w-75"
+                   id="password"
+                   [(ngModel)]="credentials.password">
+          </div>
+          <div class="d-flex flex-row justify-content-end my-2">
+            <a class="btn btn-primary" (click)="submit()">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

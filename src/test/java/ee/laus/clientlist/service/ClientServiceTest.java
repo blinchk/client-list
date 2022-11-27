@@ -52,6 +52,7 @@ class ClientServiceTest {
 
     @Test
     void findAllByCurrentUser() {
+        when(userService.getCurrentUser()).thenReturn(user);
         clientService.findAllByCurrentUser();
         verify(clientRepository).findAllByUser(any());
     }

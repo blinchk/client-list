@@ -21,6 +21,8 @@ public class Client {
     private String lastName;
     private String email;
     @NotBlank
+    private String username;
+    @NotBlank
     private String address;
     @ManyToOne
     private Country country;

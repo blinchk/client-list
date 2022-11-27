@@ -17,7 +17,6 @@ public class UserService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        final User user = repository.findById(userDetails.getId()).orElseThrow(UnauthorizedException::new);
-        return user;
+        return repository.findById(userDetails.getId()).orElseThrow(UnauthorizedException::new);
     }
 }
