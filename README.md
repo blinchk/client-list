@@ -11,3 +11,8 @@ Technologies:
 
 ## How to run?
 `docker compose up -d`
+
+## Users
+* user1 / password1
+* user2 / password2
+* user3 / password3
