@@ -25,7 +25,7 @@ public class JwtSupport {
         return JwtTokenUtil.parseUsername(token, getProperties());
     }
 
-    private JwtProperties getProperties() {
+    public JwtProperties getProperties() {
         return config.getProperties();
     }
 }

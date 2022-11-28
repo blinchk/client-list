@@ -10,8 +10,6 @@ import org.springframework.http.HttpHeaders;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,5 +30,11 @@ class AuthControllerTest {
         when(request.getHeader(HttpHeaders.AUTHORIZATION)).thenReturn(headerValue);
         authController.login(request);
         verify(authService).authenticate(headerValue);
+    }
+
+    @Test
+    void isLoggedIn() {
+        authController.isLoggedIn();
+        verify(authService).isLoggedIn();
     }
 }

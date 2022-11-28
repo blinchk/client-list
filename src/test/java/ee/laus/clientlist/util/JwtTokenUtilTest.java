@@ -2,6 +2,7 @@ package ee.laus.clientlist.util;
 
 import ee.laus.clientlist.model.auth.JwtProperties;
 import ee.laus.clientlist.model.auth.UserDetailsImpl;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -15,8 +16,7 @@ import org.springframework.security.core.Authentication;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,16 +30,16 @@ class JwtTokenUtilTest {
     @BeforeEach
     void setUp() {
         properties = new JwtProperties(SIGNING_KEY, EXPIRATION_TIME_IN_DAYS);
-        when(authentication.getPrincipal()).thenReturn(
-                new UserDetailsImpl(3L, "user", "password"));
     }
 
     @Test
     void generate() {
         final String expectedSubject = "user";
         final long dayBeforeExpiration = EXPIRATION_TIME_IN_DAYS-1L;
+        when(authentication.getPrincipal()).thenReturn(
+                new UserDetailsImpl(3L, "user", "password"));
         String token = JwtTokenUtil.generate(authentication, properties);
-        Jws claims = Jwts.parser().setSigningKey(SIGNING_KEY).parseClaimsJws(token);
+        Jws<Claims> claims = Jwts.parser().setSigningKey(SIGNING_KEY).parseClaimsJws(token);
         final DefaultClaims body = (DefaultClaims) claims.getBody();
         assertEquals(expectedSubject, body.getSubject());
         assertTrue(Timestamp.valueOf(LocalDateTime.now().plusDays(dayBeforeExpiration)).before(body.getExpiration()));
@@ -47,8 +47,17 @@ class JwtTokenUtilTest {
 
     @Test
     void validate() {
+        when(authentication.getPrincipal()).thenReturn(
+                new UserDetailsImpl(3L, "user", "password"));
         final String token = JwtTokenUtil.generate(authentication, properties);
         boolean actual = JwtTokenUtil.verify(token, properties);
         assertTrue(actual);
+    }
+
+    @Test
+    void validate_throwsException() {
+        final String token = null;
+        assertThrows(IllegalArgumentException.class, () ->
+                JwtTokenUtil.validate(token));
     }
 }

@@ -5,6 +5,9 @@ public class BearerAuthHeaderUtil {
     protected static final int HEADER_SUBSTRING_START_INDEX = HEADER_AUTHORIZATION_TYPE.length();
 
     public static String extract(final String header) {
+        if (!header.contains(HEADER_AUTHORIZATION_TYPE)) {
+            throw new IllegalArgumentException("Header must contain authorization type");
+        }
         return header.substring(HEADER_SUBSTRING_START_INDEX).trim();
     }
 }
