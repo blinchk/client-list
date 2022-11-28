@@ -7,12 +7,23 @@ Technologies:
 * H2 Database
 * JUnit5 + Mockito
 * Angular
+* Bootstrap
 
 
 ## How to run?
-`docker compose up -d`
+`docker compose up -d` or `gradle bootRun`
 
-## Users
-* user1 / password1
-* user2 / password2
-* user3 / password3
+## Testing data
+
+### Ports
+| App       | Port |
+|-----------|------|
+| Front-End | 3000 |
+| Back-End  | 8080 |
+
+### Users
+| Username | Password  |
+|----------|-----------|
+| user1    | password1 |
+| user2    | password2 |
+| user3    | password3 |
