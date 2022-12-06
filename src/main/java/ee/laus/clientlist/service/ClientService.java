@@ -22,7 +22,7 @@ public class ClientService {
     private final ClientRepository repository;
     private final UserService userService;
     private final ModelMapper mapper;
-    private final static Logger logger = LoggerFactory.getLogger(ClientService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
 
     public List<ClientListItemResponse> findAllByCurrentUser() {
         final User user = userService.getCurrentUser();

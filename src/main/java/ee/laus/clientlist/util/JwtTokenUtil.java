@@ -3,12 +3,14 @@ package ee.laus.clientlist.util;
 import ee.laus.clientlist.exception.JwtValidationException;
 import ee.laus.clientlist.model.auth.JwtProperties;
 import io.jsonwebtoken.*;
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@UtilityClass
 public class JwtTokenUtil {
 
     public static final SignatureAlgorithm DEFAULT_ALGORITHM = SignatureAlgorithm.HS512;

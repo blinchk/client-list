@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/country")
+                .antMatchers("/auth/login", "/country", "/error")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -43,12 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint((request, response, e) -> {
-                    response.sendError(
-                            HttpServletResponse.SC_UNAUTHORIZED,
-                            e.getMessage()
-                    );
-                })
+                .authenticationEntryPoint((request, response, e) -> response.sendError(
+                        HttpServletResponse.SC_UNAUTHORIZED,
+                        e.getMessage()
+                ))
                 .and()
                 .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -60,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**");
     }
 
+    @Override
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();

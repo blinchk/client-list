@@ -1,5 +1,8 @@
 package ee.laus.clientlist.util;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class BearerAuthHeaderUtil {
     private static final String HEADER_AUTHORIZATION_TYPE = "Bearer";
     protected static final int HEADER_SUBSTRING_START_INDEX = HEADER_AUTHORIZATION_TYPE.length();

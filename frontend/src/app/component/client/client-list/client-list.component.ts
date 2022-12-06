@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import ClientListItem from "../../../model/client-list-item";
 import { ClientService } from "../../../service/client/client.service";
 
@@ -7,7 +7,7 @@ import { ClientService } from "../../../service/client/client.service";
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
 })
-export class ClientListComponent implements OnInit {
+export class ClientListComponent {
   public clients: ClientListItem[] = []
 
   constructor(private clientService: ClientService) {
@@ -16,8 +16,4 @@ export class ClientListComponent implements OnInit {
         this.clients = clients;
       });
   }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,9 +1,12 @@
 package ee.laus.clientlist.util;
 
 
+import lombok.experimental.UtilityClass;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+@UtilityClass
 public class BasicTokenUtil {
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     public static final int USERNAME_INDEX = 0;

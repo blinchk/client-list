@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import UsernamePasswordCredentials from "../../model/username-password-credentials";
 import { AuthService } from "../../service/auth/auth.service";
 import JwtResponse from "../../model/jwt-response";
-import cookie from "../../util/cookie";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
@@ -10,7 +9,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public credentials: UsernamePasswordCredentials = {
     username: null,
     password: null
@@ -19,10 +18,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     this.authFailed = false
-  }
-
-  ngOnInit(): void {
-
   }
 
   submit() {

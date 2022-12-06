@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
     private final ClientService clientService;
-    private final static Logger logger = LoggerFactory.getLogger(ClientController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @GetMapping
     public List<ClientListItemResponse> findAllByCurrentUser() {
@@ -29,12 +30,12 @@ public class ClientController {
     }
 
     @PostMapping
-    public ClientResponse create(@RequestBody ClientDto dto) {
+    public ClientResponse create(@RequestBody @Valid ClientDto dto) {
         return clientService.create(dto);
     }
 
     @PostMapping("/{id}")
-    public ClientResponse update(@PathVariable Long id, @RequestBody ClientDto dto) {
+    public ClientResponse update(@PathVariable Long id, @RequestBody @Valid ClientDto dto) {
         return clientService.update(id, dto);
     }
 }

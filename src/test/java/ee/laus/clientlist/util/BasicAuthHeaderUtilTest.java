@@ -5,39 +5,39 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasicAuthHeaderUtilTest {
+
+    void validate(String header) {
+        BasicAuthHeaderUtil.validate(header);
+    }
+
     @Test
-    void validate() {
+    void validate_successfully() {
         final String header = "Basic YW55OmFueQ==";
-        assertDoesNotThrow(() -> BasicAuthHeaderUtil.validate(header));
+        assertDoesNotThrow(() -> validate(header));
     }
 
     @Test
     void validate_whenHeaderIsNull_throwsException() {
-        final String header = null;
-        assertThrows(IllegalArgumentException.class, () -> BasicAuthHeaderUtil.validate(header));
+        assertThrows(IllegalArgumentException.class, () -> validate(null));
     }
 
     @Test
     void validate_whenHeaderIsEmpty_throwsException() {
-        final String header = "";
-        assertThrows(IllegalArgumentException.class, () -> BasicAuthHeaderUtil.validate(header));
+        assertThrows(IllegalArgumentException.class, () -> validate(""));
     }
 
     @Test
-    void decode_whenHeaderIsBlank_throwsException() {
-        final String header = "      ";
-        assertThrows(IllegalArgumentException.class, () -> BasicAuthHeaderUtil.validate(header));
+    void validate_whenHeaderIsBlank_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> validate("     "));
     }
 
     @Test
-    void decode_whenHeaderIsTooShort_throwsException() {
-        final String header = "abc";
-        assertThrows(IllegalArgumentException.class, () -> BasicAuthHeaderUtil.validate(header));
+    void validate_whenHeaderIsTooShort_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> validate("abc"));
     }
 
     @Test
     void decode_whenHeaderDoesNotContainBasic_throwsException() {
-        final String header = "Twice YW55OmFueQ==";
-        assertThrows(IllegalArgumentException.class, () -> BasicAuthHeaderUtil.validate(header));
+        assertThrows(IllegalArgumentException.class, () -> validate("Twice YW55OmFueQ=="));
     }
 }

@@ -25,7 +25,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtSupport jwtSupport;
     private final UserService userService;
-    private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public JwtResponse authenticate(final String header) {
         try {

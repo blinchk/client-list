@@ -9,7 +9,7 @@ class BearerAuthHeaderUtilTest {
     @Test
     void extract() {
         final String header = "Bearer aaa";
-        BearerAuthHeaderUtil.extract(header);
+        assertDoesNotThrow(() -> BearerAuthHeaderUtil.extract(header));
     }
 
     @Test
