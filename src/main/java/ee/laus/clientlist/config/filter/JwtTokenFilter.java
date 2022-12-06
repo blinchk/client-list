@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import static ee.laus.clientlist.util.BearerAuthHeaderUtil.containsValidAuthorizationType;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         final String header = request.getHeader(AUTHORIZATION);
-        if (header == null) {
+        if (header == null || !containsValidAuthorizationType(header)) {
             filterChain.doFilter(request, response);
             return;
         }
