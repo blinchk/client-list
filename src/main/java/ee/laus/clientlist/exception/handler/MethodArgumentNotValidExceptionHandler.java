@@ -24,6 +24,6 @@ public class MethodArgumentNotValidExceptionHandler extends ResponseEntityExcept
         for (FieldError error : errors) {
             messages.put(error.getField(), error.getDefaultMessage());
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messages);
+        return ResponseEntity.badRequest().body(messages);
     }
 }
